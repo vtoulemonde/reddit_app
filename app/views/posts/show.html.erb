@@ -8,5 +8,10 @@
   <strong>Link:</strong>
   <%= @post.link %>
 </p>
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+<p><%=comment.text%> by <%=comment.author%> </p>
+<% end %>
 
+<%= link_to 'Add a comment', new_post_comment_path(@post) %>
 <%= link_to 'Back', posts_path %>
