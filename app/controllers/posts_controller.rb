@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
 	def index
-		@posts = Post.all
+		@posts = Post.all.order('created_at')
 	end
 
 	def new
@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
-
+		@post.vote = 0
 		if @post.save
 			redirect_to posts_path
 		else
@@ -39,6 +39,20 @@ class PostsController < ApplicationController
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy
+		redirect_to posts_path
+	end
+
+	def upvote
+		@post = Post.find(params[:id])
+		@post.vote += 1
+		@post.save
+		redirect_to posts_path
+	end
+
+	def downvote
+		@post = Post.find(params[:id])
+		@post.vote -= 1
+		@post.save
 		redirect_to posts_path
 	end
 

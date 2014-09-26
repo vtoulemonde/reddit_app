@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  get 'posts/index'
   root 'posts#index'
-  resources :posts
+  get 'posts/index'
+  
+  # get 'posts/:id/upvote', to 'posts#upvote'
+  # get 'posts/:id/downvote', to 'posts#downvote'
+  
+  resources :posts do
+    member do
+        get 'upvote'
+        get 'downvote'
+    end
+  end
 
 end
