@@ -1,24 +1,26 @@
 <h1>All posts</h1>
 
-<table>
+<table class="table table-striped">
 	<tr>
 		<th>Title</th>
 		<th>Link</th>
-		<th colspan="6">Actions</th>
+		<th colspan="3">Actions</th>
+		<th >Votes</th>
+		<th colspan="2"></th>
 	</tr>
 <% @posts.each do |post|%>
 	<tr>
 		<td><%=post.title%></td>
 		<td><%=post.link%></td>
-		<td><%= link_to 'Show', post_path(post) %></td>
-		<td><%= link_to 'Edit', edit_post_path(post) %></td>
+		<td><%= link_to 'Show', post_path(post), class: "btn btn-primary" %></td>
+		<td><%= link_to 'Edit', edit_post_path(post) , class: "btn btn-primary" %></td>
 		<td><%= link_to 'Delete', post_path(post),
-	                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	                    method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-primary"%></td>
 	    <td><%=post.vote%> votes</td>
-	    <td><%= link_to 'Upvote', upvote_post_path(post) %></td>
-	    <td><%= link_to 'Downvote', downvote_post_path(post) %></td>
+	    <td><%= link_to 'Upvote', upvote_post_path(post) , class: "btn btn-primary"%></td>
+	    <td><%= link_to 'Downvote', downvote_post_path(post) , class: "btn btn-primary"%></td>
 	</tr>
 <% end %>
 </table>
 <br />
-<%= link_to 'New post', new_post_path %><br />
+<%= link_to 'New post', new_post_path , class: "btn btn-primary"%><br />
