@@ -59,6 +59,18 @@ class PostsController < ApplicationController
 		redirect_to posts_path
 	end
 
+	def search
+		# Search on comments
+		comments_search = Comment.select(:post_id).where("text like ?", "%#{params[:search][:criteria]}%")
+		post_id_list = []
+		comments_search.each do |comment|
+			post_id_list << comment[:post_id]
+		end
+		# Search posts
+		@posts = Post.where("title like ? or id in ( ? )", "%#{params[:search][:criteria]}%", post_id_list).order('vote desc')
+		render 'index'
+	end
+
 	private
 
 	def post_params
