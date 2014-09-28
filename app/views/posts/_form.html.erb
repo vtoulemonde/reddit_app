@@ -1,26 +1,30 @@
 
 <% if @post.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@post.errors.count, "error") %> to resolve:</h2>
-  <ul>
-    <% @post.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
+<div id="error_explanation" class="alert alert-danger">
+  <% @post.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
 </div>
 <% end %>
 
-<%= form_for @post do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :link %><br>
-    <%= f.text_field :link %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<%= form_for @post, html: {class: "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <%= f.label :title, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :link, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :link, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary"%>
+      <%= link_to 'Back', posts_path, class: "btn btn-primary" %>
+    </div>
+  </div>
 
 <% end %>

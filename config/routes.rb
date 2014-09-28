@@ -10,9 +10,7 @@ Rails.application.routes.draw do
         get 'upvote'
         get 'downvote'
     end
-    resources :comments do
-      resources :comments
-    end
+    resources :comments
   end
 
 end

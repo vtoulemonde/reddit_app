@@ -1,16 +1,23 @@
 <h1>New comment</h1>
-<%= form_for([@post, @post.comments.build]) do |f| %>
-  <p>
-    <%= f.label :author %><br>
-    <%= f.text_field :author %>
-  </p>
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+
+<%= form_for [@post, @post.comments.build], html: {class: "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <%= f.label :author, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :author, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :text, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :text, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary"%>
+      <%= link_to 'Back', post_path(@post), class: "btn btn-primary" %>
+    </div>
+  </div>
+
 <% end %>
- 
-<%= link_to 'Back', post_path(@post) %>

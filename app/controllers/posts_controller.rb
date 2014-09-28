@@ -12,6 +12,7 @@ class PostsController < ApplicationController
 		@post = Post.new(post_params)
 		@post.vote = 0
 		if @post.save
+            flash[:success] = "Your post has been created."
 			redirect_to posts_path
 		else
 			render 'new'
@@ -28,8 +29,9 @@ class PostsController < ApplicationController
 
 	def update
 		@post = Post.find(params[:id])
-
-		if @post.update(post_params)
+		@post.update post_params
+		if @post.valid?
+            flash[:success] = "Your post has been updated."
 			redirect_to posts_path
 		else
 			render 'edit'
@@ -39,6 +41,7 @@ class PostsController < ApplicationController
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy
+		flash[:success] = "Your post has been deleted."
 		redirect_to posts_path
 	end
 
