@@ -23,8 +23,8 @@
 	    <td><%=pluralize(post.vote, "vote")%></td>
 	    <td>
 	    	<div class="btn-group">
-	    		<%= link_to '', upvote_post_path(post), class: "btn btn-default glyphicon glyphicon-thumbs-up"%>
-	    		<%= link_to '', downvote_post_path(post), class: "btn btn-default glyphicon glyphicon-thumbs-down"%>
+	    		<%= link_to '', upvote_post_path(post), method: :POST, class: "btn btn-default glyphicon glyphicon-thumbs-up"%>
+	    		<%= link_to '', downvote_post_path(post), method: :POST, class: "btn btn-default glyphicon glyphicon-thumbs-down"%>
 			</div>
 		</td>	
 	</tr>

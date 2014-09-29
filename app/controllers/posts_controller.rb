@@ -62,16 +62,8 @@ class PostsController < ApplicationController
 	end
 
 	def search
-		# Search on comments
 		if(params[:search] != nil)
-			criteria = params[:search][:criteria]
-			comments_search = Comment.where("text like ?", "%#{criteria}%")
-			post_id_list = []
-			comments_search.each do |comment|
-				post_id_list << comment.get_parent_post.id
-			end
-			# Search posts
-			@posts = Post.where("title like ? or id in ( ? )", "%#{criteria}%", post_id_list).order('vote desc')
+			@posts = Post.search(params[:search][:criteria])
 		else
 			#HELP if I sort a column on a search result, the search are no longer correct
 			@posts = Post.order(sort_column + ' ' + sort_direction)

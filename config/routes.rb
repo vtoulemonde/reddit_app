@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   resources :posts do
     member do
-        get 'upvote'
-        get 'downvote'
+        post 'upvote'
+        post 'downvote'
     end
     resources :comments
   end
