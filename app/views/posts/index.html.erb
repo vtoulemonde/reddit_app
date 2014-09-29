@@ -2,15 +2,11 @@
 
 <table class="table table-striped">
 	<tr>
-		<th><%= sortable "title" %></th>
-		<th><%= sortable "created_at" %></th>
-		<th>Actions</th>
-		<th colspan="2"><%= sortable "vote" %></th>
 
-		<!-- <th><%= link_to "Post", :sort => "title" %></th>
-		<th><%= link_to "Date", :sort => "created_at" %></th>
+		<th><%= sortable "title", "Post" %></th>
+		<th><%= sortable "created_at", "Date" %></th>
 		<th>Actions</th>
-		<th colspan="2"><%= link_to "Upvotes", :sort => "vote" %></th> -->
+		<th colspan="2"><%= sortable "vote", "Upvotes" %></th>
 	</tr>
 <% @posts.each do |post|%>
 	<tr>
