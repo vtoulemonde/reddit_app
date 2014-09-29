@@ -6,15 +6,12 @@
 <p>
   <%=pluralize(@post.vote, "vote")%>
 </p>
+<%= link_to 'Add a comment', new_post_comment_path(@post), class: "btn btn-primary"%>
+<%= link_to 'Back', posts_path, class: "btn btn-primary" %>
+<br /><br />
 <div class="well">
-<h3>Comments</h3>
-<% @post.comments.each do |comment| %>
-<blockquote>
-  <p><%=comment.text%></p>
-  <footer>by <%=comment.author%></footer>
-</blockquote>
-
-<% end %>
+	<h3>Comments</h3>
+	<%= render :partial => 'comments/comment', :object => @post %>
 </div>
 <%= link_to 'Add a comment', new_post_comment_path(@post), class: "btn btn-primary"%>
 <%= link_to 'Back', posts_path, class: "btn btn-primary" %>

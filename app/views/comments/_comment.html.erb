@@ -1,0 +1,8 @@
+<% comment.comments.each do |subcomment| %>
+	<blockquote>
+		<p><%=subcomment.author%> at <%=subcomment.created_at.strftime("%b %e, %Y")%></p>
+		<footer><%=subcomment.text%> <%= link_to 'Add a comment', new_comment_comment_path(subcomment), class: "btn-sm btn-primary"%></footer></footer>
+	  
+	  <%= render :partial => 'comments/comment', :object => subcomment %>
+	</blockquote>
+<% end %>
