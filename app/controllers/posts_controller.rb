@@ -65,10 +65,10 @@ class PostsController < ApplicationController
 		# Search on comments
 		if(params[:search] != nil)
 			criteria = params[:search][:criteria]
-			comments_search = Comment.select(:post_id).where("text like ?", "%#{criteria}%")
+			comments_search = Comment.where("text like ?", "%#{criteria}%")
 			post_id_list = []
 			comments_search.each do |comment|
-				post_id_list << comment[:post_id]
+				post_id_list << comment.get_parent_post.id
 			end
 			# Search posts
 			@posts = Post.where("title like ? or id in ( ? )", "%#{criteria}%", post_id_list).order('vote desc')
