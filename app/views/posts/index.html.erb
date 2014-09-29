@@ -2,13 +2,20 @@
 
 <table class="table table-striped">
 	<tr>
-		<th>Post</th>
+		<th><%= sortable "title" %></th>
+		<th><%= sortable "created_at" %></th>
 		<th>Actions</th>
-		<th colspan="2">Votes</th>
+		<th colspan="2"><%= sortable "vote" %></th>
+
+		<!-- <th><%= link_to "Post", :sort => "title" %></th>
+		<th><%= link_to "Date", :sort => "created_at" %></th>
+		<th>Actions</th>
+		<th colspan="2"><%= link_to "Upvotes", :sort => "vote" %></th> -->
 	</tr>
 <% @posts.each do |post|%>
 	<tr>
 		<td><a href="<%= post.link %>"><%= post.title %></a></td>
+		<td><%= post.created_at.strftime("%b %e, %Y") %></td>
 		<td>
 			<div class="btn-group">
 				<%= link_to 'Show', post_path(post), class: "btn btn-primary" %>
@@ -20,8 +27,8 @@
 	    <td><%=pluralize(post.vote, "vote")%></td>
 	    <td>
 	    	<div class="btn-group">
-	    		<%= link_to ' Upvote', upvote_post_path(post), class: "btn btn-default glyphicon glyphicon-thumbs-up"%>
-	    		<%= link_to ' Downvote', downvote_post_path(post), class: "btn btn-default glyphicon glyphicon-thumbs-down"%>
+	    		<%= link_to '', upvote_post_path(post), class: "btn btn-default glyphicon glyphicon-thumbs-up"%>
+	    		<%= link_to '', downvote_post_path(post), class: "btn btn-default glyphicon glyphicon-thumbs-down"%>
 			</div>
 		</td>	
 	</tr>
