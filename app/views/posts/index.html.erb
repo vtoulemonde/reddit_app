@@ -20,11 +20,11 @@
 	                    method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-primary"%>
 	        </div>
 	    </td>
-	    <td><%=pluralize(post.vote, "vote")%></td>
+	    <td id="vote_<%=post.id%>"><%=pluralize(post.vote, "vote")%></td>
 	    <td>
 	    	<div class="btn-group">
-	    		<%= link_to '', upvote_post_path(post), method: :POST, class: "btn btn-default glyphicon glyphicon-thumbs-up"%>
-	    		<%= link_to '', downvote_post_path(post), method: :POST, class: "btn btn-default glyphicon glyphicon-thumbs-down"%>
+	    		<button class="btn btn-default glyphicon glyphicon-thumbs-up" id="<%=post.id%>/upvote"></button>
+	    		<button class="btn btn-default glyphicon glyphicon-thumbs-down" id="<%=post.id%>/downvote"></button>
 			</div>
 		</td>	
 	</tr>
@@ -32,3 +32,25 @@
 </table>
 <br />
 <%= link_to 'New post', new_post_path , class: "btn btn-primary"%><br />
+
+
+<script type="text/javascript">
+$('.glyphicon').click(function(e){
+
+	var request = $.ajax({
+		url: "/posts/" + e.target.id,
+		type: "POST",
+		data: {},
+		dataType: "json"
+	});
+
+	request.done(function(data){
+		$('#vote_'+data.id)[0].textContent = data.vote+" votes"
+	})
+
+	request.fail(function(data){
+		$('.message').append("<p> There was an error upvoting/downvoting the post.</p>")
+	})
+
+});
+</script>

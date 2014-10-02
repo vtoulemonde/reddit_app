@@ -50,20 +50,34 @@ class PostsController < ApplicationController
 	def upvote
 		@post = Post.find(params[:id])
 		@post.vote += 1
-		@post.save
-		redirect_to posts_path
+		respond_to do |format|
+			if @post.save
+				format.html{redirect_to posts_path}
+				format.json{render json: @post }
+			else
+				format.html{render :index}
+				format.json{render json: @post.errors, status: :unprocessable_entity}
+			end
+		end
 	end
 
 	def downvote
 		@post = Post.find(params[:id])
 		@post.vote -= 1
-		@post.save
-		redirect_to posts_path
+		respond_to do |format|
+			if @post.save
+				format.html{redirect_to posts_path}
+				format.json{render json: @post }
+			else
+				format.html{render :index}
+				format.json{render json: @post.errors, status: :unprocessable_entity}
+			end
+		end
 	end
 
 	def search
 		if(params[:search] != nil)
-			@posts = Post.search(params[:search][:criteria])
+			@posts = Post.search(params[:search])
 		else
 			#HELP if I sort a column on a search result, the search are no longer correct
 			@posts = Post.order(sort_column + ' ' + sort_direction)
